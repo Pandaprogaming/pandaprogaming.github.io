@@ -1,2 +1,2 @@
-# https://pandaprogaming.github.io/FunkiniOS-Web/
+# https://pandaprogaming.github.io
 
