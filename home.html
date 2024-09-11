@@ -1,12 +1,189 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tilted's Gaming Grounds - Home</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Fancy font and text effects */
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: white;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .hero-section {
+            height: 100vh;
+            background: url('https://source.unsplash.com/1600x900/?gaming') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Parallax background */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .cta-button {
+            padding: 1rem 3rem;
+            background-color: var(--accent-color);
+            color: var(--background-color);
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+            transition: background-color 0.3s ease;
+            letter-spacing: 2px;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Navigation styling */
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            padding: 1rem;
+            margin: 0;
+        }
+
+        nav ul li a {
+            text-transform: uppercase;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Animated underline on hover */
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-color);
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+
+        nav ul li a:hover::before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+
+        /* Animation effects */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Dark mode toggle switch */
+        .toggle-switch {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .toggle-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+            color: white;
+        }
+
+        .toggle-text {
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+
+        /* Additional fancy section after hero */
+        .fancy-section {
+            padding: 3rem 2rem;
+            background-color: var(--accent-hover);
+            text-align: center;
+        }
+
+        .fancy-section h2 {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .fancy-section p {
+            font-size: 1.2rem;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header with Dark Mode Toggle -->
     <header>
         <h1>Tilted's Gaming Grounds</h1>
         <nav>
@@ -24,11 +201,22 @@
             <span class="toggle-text">Light Mode</span>
         </div>
     </header>
+
+    <!-- Hero Section with Parallax Background -->
     <section class="hero-section">
-        <h2>Where Gamers Thrive!</h2>
-        <p>Discover, compete, and connect with fellow gamers.</p>
-        <button class="cta-button">Join the Grounds!</button>
+        <div class="hero-content">
+            <h2>Where Gamers Thrive!</h2>
+            <p>Discover, compete, and connect with fellow gamers.</p>
+            <button class="cta-button">Join the Grounds!</button>
+        </div>
     </section>
+
+    <!-- Additional Fancy Section -->
+    <section class="fancy-section">
+        <h2>Explore Our Featured Games</h2>
+        <p>Handpicked by our team, these games represent the best in gaming.</p>
+    </section>
+
     <script src="script.js"></script>
 </body>
 </html>
