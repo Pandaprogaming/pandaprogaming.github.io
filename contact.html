@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Tilted's Gaming Grounds</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Default light mode styles */
+        body {
+            background-color: white;
+            color: black;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1, h2, p, a, button {
+            color: black;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        body.dark-mode h1, 
+        body.dark-mode h2, 
+        body.dark-mode p, 
+        body.dark-mode a, 
+        body.dark-mode button {
+            color: white;
+        }
+
+        /* Header styling */
+        header {
+            background: #333;
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff5722;
+        }
+
+        .toggle-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .toggle-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .toggle-text {
+            font-size: 1rem;
+        }
+
+        /* Main content styling */
+        .main-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .main-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            margin: 1rem 0;
+        }
+
+        .contact-button {
+            background-color: #ff5722;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s, opacity 0.5s;
+        }
+
+        .contact-button:hover {
+            background-color: #e64a19;
+        }
+
+        .contact-button img {
+            width: 24px;
+            vertical-align: middle;
+            margin-right: 0.5rem;
+        }
+
+        .message {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            display: none;
+        }
+
+        /* Dark mode adjustments */
+        body.dark-mode .contact-button {
+            background-color: #e64a19;
+        }
+
+        body.dark-mode .contact-button:hover {
+            background-color: #ff5722;
+        }
+
+        body.dark-mode .message {
+            color: #e0e0e0;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .main-content h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Dark Mode Toggle -->
+    <header>
+        <h1>Contact Us</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="featured.html">Featured Games</a></li>
+                <li><a href="tournaments.html">Tournaments</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="toggle-switch" id="theme-toggle">
+            <span class="toggle-icon" id="toggle-icon">🌞</span>
+            <span class="toggle-text">Light Mode</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Get in Touch!</h2>
+        <button class="contact-button" id="discord-button">
+            <img src="https://img.icons8.com/material-outlined/24/000000/discord.png" alt="Discord Icon"/>
+            Contact on Discord
+        </button>
+        <p class="message" id="discord-message">Any ideas send them to @The_Tilted_Gamer on Discord</p>
+        
+        <div style="margin-top: 2rem;">
+            <a href="https://www.youtube.com/channel/UCexample" target="_blank" class="contact-button">
+                <img src="https://img.icons8.com/material-outlined/24/000000/youtube.png" alt="YouTube Icon"/>
+                Visit our YouTube
+            </a>
+            <a href="https://www.tiktok.com/@example" target="_blank" class="contact-button" style="margin-left: 1rem;">
+                <img src="https://img.icons8.com/material-outlined/24/000000/tiktok.png" alt="TikTok Icon"/>
+                Follow us on TikTok
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Dark Mode Toggle
+        const toggleSwitch = document.getElementById('theme-toggle');
+        const bodyElement = document.body;
+        const iconElement = document.getElementById('toggle-icon');
+        const textElement = document.querySelector('.toggle-text');
+
+        // Load theme from localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            bodyElement.classList.add('dark-mode');
+            iconElement.textContent = '🌜';
+            textElement.textContent = 'Dark Mode';
+        }
+
+        toggleSwitch.addEventListener('click', () => {
+            // Toggle the 'dark-mode' class on the body
+            bodyElement.classList.toggle('dark-mode');
+
+            // Change the icon and text based on mode
+            if (bodyElement.classList.contains('dark-mode')) {
+                iconElement.textContent = '🌜'; // Moon icon for dark mode
+                textElement.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                iconElement.textContent = '🌞'; // Sun icon for light mode
+                textElement.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // JavaScript for Discord Button
+        const discordButton = document.getElementById('discord-button');
+        const discordMessage = document.getElementById('discord-message');
+
+        discordButton.addEventListener('click', () => {
+            discordButton.style.opacity = '0';
+            setTimeout(() => {
+                discordMessage.style.display = 'block';
+            }, 500); // Matches the fade-out duration
+        });
+    </script>
+</body>
+</html>
