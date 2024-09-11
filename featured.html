@@ -12,163 +12,7 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* Default light mode styles */
-        body {
-            background-color: white;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        h1, h2, p, a, .cta-button {
-            color: black;
-        }
-
-        /* Dark mode styles */
-        body.dark-mode {
-            background-color: #1e1e1e;
-            color: white;
-        }
-
-        body.dark-mode h1, 
-        body.dark-mode h2, 
-        body.dark-mode p, 
-        body.dark-mode a, 
-        body.dark-mode .cta-button {
-            color: white;
-        }
-
-        /* Fancy font and text effects */
-        h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.5rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        p {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .featured-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .featured-game {
-            background-color: #f0f0f0;
-            border-radius: 10px;
-            padding: 1.5rem;
-            transition: transform 0.3s ease;
-            text-decoration: none;
-        }
-
-        .featured-game:hover {
-            transform: scale(1.05);
-        }
-
-        body.dark-mode .featured-game {
-            background-color: #333;
-        }
-
-        .game-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .game-description {
-            font-size: 1rem;
-            color: #666;
-        }
-
-        body.dark-mode .game-description {
-            color: #ccc;
-        }
-
-        /* Navigation styling */
-        nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            padding: 1rem;
-            justify-content: center;
-            margin: 0;
-        }
-
-        nav ul li a {
-            text-transform: uppercase;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: #ff5722;
-        }
-
-        nav ul li a::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #ff5722;
-            visibility: hidden;
-            transform: scaleX(0);
-            transition: all 0.3s ease-in-out;
-        }
-
-        nav ul li a:hover::before {
-            visibility: visible;
-            transform: scaleX(1);
-        }
-
-        /* Dark mode toggle switch */
-        .toggle-switch {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .toggle-icon {
-            font-size: 2rem;
-            margin-right: 0.5rem;
-        }
-
-        .toggle-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-        }
-
-        /* Responsive layout */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-
-            .featured-game {
-                padding: 1rem;
-            }
-        }
+        /* Your existing styles */
     </style>
 </head>
 <body>
@@ -193,20 +37,19 @@
 
     <!-- Featured Games Section -->
     <section class="featured-section">
-        <a href="https://supermario64.glitch.me" target="_blank" class="featured-game">
-            <h2 class="game-title">Super Mario 64</h2>
-            <p class="game-description">
-Super Mario 64 is a groundbreaking 3D platformer where players control Mario as he navigates through various levels to collect Power Stars and rescue Princess Peach from Bowser.</p>
+        <a href="https://actualgameurl1.com" target="_blank" class="featured-game">
+            <h2 class="game-title">Game 1</h2>
+            <p class="game-description">A thrilling action-packed game with immersive gameplay and stunning visuals.</p>
         </a>
-        <a href="https://example.com/game2" target="_blank" class="featured-game">
+        <a href="https://actualgameurl2.com" target="_blank" class="featured-game">
             <h2 class="game-title">Game 2</h2>
             <p class="game-description">An adventure game that will take you on a journey through incredible worlds.</p>
         </a>
-        <a href="https://example.com/game3" target="_blank" class="featured-game">
+        <a href="https://actualgameurl3.com" target="_blank" class="featured-game">
             <h2 class="game-title">Game 3</h2>
             <p class="game-description">A competitive multiplayer experience that will test your strategy and skills.</p>
         </a>
-        <a href="https://example.com/game4" target="_blank" class="featured-game">
+        <a href="https://actualgameurl4.com" target="_blank" class="featured-game">
             <h2 class="game-title">Game 4</h2>
             <p class="game-description">A puzzle game that challenges your mind with creative and innovative levels.</p>
         </a>
@@ -219,6 +62,14 @@ Super Mario 64 is a groundbreaking 3D platformer where players control Mario as 
         const iconElement = document.getElementById('toggle-icon');
         const textElement = document.querySelector('.toggle-text');
 
+        // Load theme from localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            bodyElement.classList.add('dark-mode');
+            iconElement.textContent = '🌜';
+            textElement.textContent = 'Dark Mode';
+        }
+
         toggleSwitch.addEventListener('click', () => {
             // Toggle the 'dark-mode' class on the body
             bodyElement.classList.toggle('dark-mode');
@@ -227,9 +78,11 @@ Super Mario 64 is a groundbreaking 3D platformer where players control Mario as 
             if (bodyElement.classList.contains('dark-mode')) {
                 iconElement.textContent = '🌜'; // Moon icon for dark mode
                 textElement.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'dark');
             } else {
                 iconElement.textContent = '🌞'; // Sun icon for light mode
                 textElement.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'light');
             }
         });
     </script>
