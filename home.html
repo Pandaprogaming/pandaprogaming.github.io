@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tilted's Gaming Grounds - Home</title>
+    <title>Home - Tilted's Gaming Grounds</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
@@ -12,191 +12,13 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* Default light mode styles */
-        body {
-            background-color: white;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        h1, h2, p, a, .cta-button {
-            color: black;
-        }
-
-        /* Dark mode styles */
-        body.dark-mode {
-            background-color: #1e1e1e;
-            color: white;
-        }
-
-        body.dark-mode h1, 
-        body.dark-mode h2, 
-        body.dark-mode p, 
-        body.dark-mode a, 
-        body.dark-mode .cta-button {
-            color: white;
-        }
-
-        /* Toggle switch styles */
-        .toggle-switch {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .toggle-icon {
-            font-size: 2rem;
-            margin-right: 0.5rem;
-        }
-
-        .toggle-text {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-        }
-
-        /* Fancy font and text effects */
-        h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            animation: fadeInDown 1s ease-in-out;
-        }
-
-        h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 2.5rem;
-        }
-
-        p {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-        }
-
-        .hero-section {
-            height: 100vh;
-            background: url('https://source.unsplash.com/1600x900/?gaming') center/cover no-repeat;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: -1;
-        }
-
-        .cta-button {
-            padding: 1rem 3rem;
-            background-color: #ff5722;
-            border: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-            font-family: 'Bebas Neue', sans-serif;
-            transition: background-color 0.3s ease;
-            letter-spacing: 2px;
-        }
-
-        .cta-button:hover {
-            background-color: #e64a19;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            padding: 1rem;
-            margin: 0;
-        }
-
-        nav ul li a {
-            text-transform: uppercase;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: #ff5722;
-        }
-
-        nav ul li a::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #ff5722;
-            visibility: hidden;
-            transform: scaleX(0);
-            transition: all 0.3s ease-in-out;
-        }
-
-        nav ul li a:hover::before {
-            visibility: visible;
-            transform: scaleX(1);
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fancy-section {
-            padding: 3rem 2rem;
-            background-color: #e64a19;
-            text-align: center;
-        }
-
-        .fancy-section h2 {
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 1s ease-in-out;
-        }
-
-        .fancy-section p {
-            font-size: 1.2rem;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        /* Your existing styles */
     </style>
 </head>
 <body>
     <!-- Header with Dark Mode Toggle -->
     <header>
-        <h1>Tilted's Gaming Grounds</h1>
+        <h1>Welcome to Tilted's Gaming Grounds</h1>
         <nav>
             <ul>
                 <li><a href="home.html">Home</a></li>
@@ -213,20 +35,10 @@
         </div>
     </header>
 
-    <!-- Hero Section with Parallax Background -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h2>Where Gamers Thrive!</h2>
-            <p>Discover, compete, and connect with fellow gamers.</p>
-            <button class="cta-button">Join the Grounds!</button>
-        </div>
-    </section>
-
-    <!-- Additional Fancy Section -->
-    <section class="fancy-section">
-        <h2>Explore Our Featured Games</h2>
-        <p>Handpicked by our team, these games represent the best in gaming. (at the top of the page</p>
-    </section>
+    <!-- Main Content -->
+    <main>
+        <!-- Content of the home page -->
+    </main>
 
     <script>
         // JavaScript for Dark Mode Toggle
@@ -234,6 +46,14 @@
         const bodyElement = document.body;
         const iconElement = document.getElementById('toggle-icon');
         const textElement = document.querySelector('.toggle-text');
+
+        // Load theme from localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            bodyElement.classList.add('dark-mode');
+            iconElement.textContent = '🌜';
+            textElement.textContent = 'Dark Mode';
+        }
 
         toggleSwitch.addEventListener('click', () => {
             // Toggle the 'dark-mode' class on the body
@@ -243,9 +63,11 @@
             if (bodyElement.classList.contains('dark-mode')) {
                 iconElement.textContent = '🌜'; // Moon icon for dark mode
                 textElement.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'dark');
             } else {
                 iconElement.textContent = '🌞'; // Sun icon for light mode
                 textElement.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'light');
             }
         });
     </script>
