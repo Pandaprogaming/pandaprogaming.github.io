@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Featured Games - Tilted's Gaming Grounds</title>
+    <title>Featured - Tilted's Gaming Grounds</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
@@ -12,79 +12,99 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* Your existing styles */
-    </style>
-</head>
-<body>
-    <!-- Header with Dark Mode Toggle -->
-    <header>
-        <h1>Featured Games</h1>
-        <nav>
-            <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="featured.html">Featured Games</a></li>
-                <li><a href="tournaments.html">Tournaments</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="toggle-switch" id="theme-toggle">
-            <span class="toggle-icon" id="toggle-icon">🌞</span>
-            <span class="toggle-text">Light Mode</span>
-        </div>
-    </header>
-
-    <!-- Featured Games Section -->
-    <section class="featured-section">
-        <a href="https://actualgameurl1.com" target="_blank" class="featured-game">
-            <h2 class="game-title">Game 1</h2>
-            <p class="game-description">A thrilling action-packed game with immersive gameplay and stunning visuals.</p>
-        </a>
-        <a href="https://actualgameurl2.com" target="_blank" class="featured-game">
-            <h2 class="game-title">Game 2</h2>
-            <p class="game-description">An adventure game that will take you on a journey through incredible worlds.</p>
-        </a>
-        <a href="https://actualgameurl3.com" target="_blank" class="featured-game">
-            <h2 class="game-title">Game 3</h2>
-            <p class="game-description">A competitive multiplayer experience that will test your strategy and skills.</p>
-        </a>
-        <a href="https://actualgameurl4.com" target="_blank" class="featured-game">
-            <h2 class="game-title">Game 4</h2>
-            <p class="game-description">A puzzle game that challenges your mind with creative and innovative levels.</p>
-        </a>
-    </section>
-
-    <script>
-        // JavaScript for Dark Mode Toggle
-        const toggleSwitch = document.getElementById('theme-toggle');
-        const bodyElement = document.body;
-        const iconElement = document.getElementById('toggle-icon');
-        const textElement = document.querySelector('.toggle-text');
-
-        // Load theme from localStorage
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            bodyElement.classList.add('dark-mode');
-            iconElement.textContent = '🌜';
-            textElement.textContent = 'Dark Mode';
+        /* Default light mode styles */
+        body {
+            background-color: white;
+            color: black;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
         }
 
-        toggleSwitch.addEventListener('click', () => {
-            // Toggle the 'dark-mode' class on the body
-            bodyElement.classList.toggle('dark-mode');
+        h1, h2, p, a {
+            color: black;
+        }
 
-            // Change the icon and text based on mode
-            if (bodyElement.classList.contains('dark-mode')) {
-                iconElement.textContent = '🌜'; // Moon icon for dark mode
-                textElement.textContent = 'Dark Mode';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                iconElement.textContent = '🌞'; // Sun icon for light mode
-                textElement.textContent = 'Light Mode';
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    </script>
-</body>
-</html>
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        body.dark-mode h1, 
+        body.dark-mode h2, 
+        body.dark-mode p, 
+        body.dark-mode a {
+            color: white;
+        }
+
+        /* Header styling */
+        header {
+            background: #333;
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff5722;
+        }
+
+        .toggle-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .toggle-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .toggle-text {
+            font-size: 1rem;
+        }
+
+        /* Main content styling */
+        .main-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .main-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            margin: 0.5rem
