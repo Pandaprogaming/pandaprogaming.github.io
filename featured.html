@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Featured - Tilted's Gaming Grounds</title>
+    <title>Featured Games - Tilted's Gaming Grounds</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
@@ -123,11 +123,6 @@
             transition: background-color 0.3s, box-shadow 0.3s;
         }
 
-        .game-card:hover {
-            background-color: #eee;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-
         .game-card h3 {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.5rem;
@@ -147,6 +142,16 @@
 
         .game-card button:hover {
             background-color: #e64a19;
+        }
+
+        /* Dark mode adjustments for game cards */
+        body.dark-mode .game-card {
+            background: #2c2c2c;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+        }
+
+        body.dark-mode .game-card h3 {
+            color: #e0e0e0;
         }
 
         /* Responsive styling */
@@ -194,15 +199,15 @@
             <button onclick="window.open('https://example.com/game1', '_blank')">Play Now</button>
         </div>
         <div class="game-card">
-            <h3>SoonTM</h3>
+            <h3>Game 2</h3>
             <button onclick="window.open('https://example.com/game2', '_blank')">Play Now</button>
         </div>
         <div class="game-card">
-            <h3>SoonTM</h3>
+            <h3>Game 3</h3>
             <button onclick="window.open('https://example.com/game3', '_blank')">Play Now</button>
         </div>
         <div class="game-card">
-            <h3>SoonTM</h3>
+            <h3>Game 4</h3>
             <button onclick="window.open('https://example.com/game4', '_blank')">Play Now</button>
         </div>
     </div>
