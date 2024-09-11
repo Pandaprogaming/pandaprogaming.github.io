@@ -1,4 +1,4 @@
-# TTG.github.io
+# pandaprogaming.github.io
 THIS SITE IS IN THE WORKS
 
 DO NOT FORK
