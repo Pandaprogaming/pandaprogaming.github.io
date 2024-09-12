@@ -5,18 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tilted's Gaming Grounds</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
     <style>
-        /* Include your styles here or link to an external stylesheet */
+        /* General styles for the home page */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
             color: #333;
+            margin: 0;
+            padding: 0;
         }
-        /* Add more styles as needed */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .banner {
+            background: url('your-banner-image.jpg') no-repeat center center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+        }
+        .banner h1 {
+            font-size: 3em;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -30,37 +64,17 @@
         </nav>
     </header>
 
-    <main>
-        <h2>Welcome to Tilted's Gaming Grounds!</h2>
-        <p>Your go-to place for the latest games and gaming news.</p>
-        <!-- Add more content as needed -->
-    </main>
+    <div class="banner">
+        <h1>Welcome to Tilted's Gaming Grounds</h1>
+    </div>
+
+    <div class="content">
+        <h2>Your go-to place for the latest games and gaming news!</h2>
+        <p>Discover exciting new games, join our community, and stay updated with the latest in gaming.</p>
+    </div>
 
     <footer>
         <p>&copy; 2024 Tilted's Gaming Grounds. All rights reserved.</p>
     </footer>
-
-    <!-- Firebase Configuration -->
-    <script>
-        // Your Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCDz9DVYDtAAdwu13q_PtwvYU5ImEESXz4",
-            authDomain: "tilteds-gaming-grounds.firebaseapp.com",
-            projectId: "tilteds-gaming-grounds",
-            storageBucket: "tilteds-gaming-grounds.appspot.com",
-            messagingSenderId: "584426167253",
-            appId: "1:584426167253:web:9f0a0a3f78e70c9b38bb5c",
-            measurementId: "G-E5NWG5V5V1"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        // Initialize Firebase Authentication and Firestore
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-        
-        // Optional: Add additional Firebase setup or functions as needed
-    </script>
 </body>
 </html>
