@@ -101,22 +101,11 @@
         /* Main content styling */
         .main-content {
             padding: 2rem;
+            text-align: center;
         }
 
-        .game-card {
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 1rem;
-            margin: 1rem 0;
-            transition: background 0.3s;
-        }
-
-        .game-card:hover {
-            background: #e0e0e0;
-        }
-
-        .button {
+        .game-button {
+            display: inline-block;
             background: #ff5722;
             color: white;
             padding: 1rem 2rem;
@@ -126,64 +115,30 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             text-decoration: none;
-            display: inline-block;
             margin: 0.5rem;
         }
 
-        .button:hover {
+        .game-button:hover {
             background: #e64a19;
         }
 
-        /* Popup styling */
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #333;
-            color: white;
-            padding: 2rem;
+        .game-card {
+            display: inline-block;
+            margin: 1rem;
+            border: 1px solid #ddd;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            z-index: 1000;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .popup.active {
-            display: block;
-        }
-
-        .popup button {
-            background: #ff5722;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            margin-top: 1rem;
-        }
-
-        .popup button:hover {
-            background: #e64a19;
-        }
-
-        /* Overlay styling */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .game-card img {
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
+            height: auto;
         }
 
-        .overlay.active {
-            display: block;
+        .game-card .game-info {
+            padding: 1rem;
+            text-align: center;
         }
 
         /* Responsive styling */
@@ -192,8 +147,9 @@
                 font-size: 2.5rem;
             }
 
-            .main-content h2 {
-                font-size: 2rem;
+            .game-button {
+                font-size: 0.9rem;
+                padding: 0.8rem 1.5rem;
             }
         }
     </style>
@@ -218,37 +174,39 @@
 
     <!-- Main Content -->
     <div class="main-content">
+        <h2>Check Out These Games!</h2>
         <div class="game-card">
-            <h2>Super Mario 64</h2>
-            <p>Super Mario 64 is a groundbreaking 3D platformer where players control Mario as he navigates through various levels to collect Power Stars and rescue Princess Peach from Bowser.</p>
-            <a href="https://supermario64.glitch.me" class="button">Play Now</a>
+            <img src="game1-thumbnail.jpg" alt="Game 1">
+            <div class="game-info">
+                <h3>SUper Mario 64</h3>
+                <a href="https://supermario64.glitch.me" class="game-button" target="_blank">Play Now</a>
+            </div>
         </div>
         <div class="game-card">
-            <h2>Game 2</h2>
-            <p>Description of Game 2.</p>
-            <a href="game2.html" class="button">Play Now</a>
+            <img src="game2-thumbnail.jpg" alt="Game 2">
+            <div class="game-info">
+                <h3>Game 2</h3>
+                <a href="https://example.com/game2" class="game-button" target="_blank">Play Now</a>
+            </div>
         </div>
         <div class="game-card">
-            <h2>Game 3</h2>
-            <p>Description of Game 3.</p>
-            <a href="game3.html" class="button">Play Now</a>
+            <img src="game3-thumbnail.jpg" alt="Game 3">
+            <div class="game-info">
+                <h3>Game 3</h3>
+                <a href="https://example.com/game3" class="game-button" target="_blank">Play Now</a>
+            </div>
         </div>
         <div class="game-card">
-            <h2>Game 4</h2>
-            <p>Description of Game 4.</p>
-            <a href="game4.html" class="button">Play Now</a>
+            <img src="game4-thumbnail.jpg" alt="Game 4">
+            <div class="game-info">
+                <h3>Game 4</h3>
+                <a href="https://example.com/game4" class="game-button" target="_blank">Play Now</a>
+            </div>
         </div>
     </div>
 
-    <!-- Popup -->
-    <div class="overlay" id="overlay"></div>
-    <div class="popup" id="popup">
-        <p>Under Construction</p>
-        <button onclick="closePopup()">OK</button>
-    </div>
-
+    <!-- JavaScript for Dark Mode Toggle -->
     <script>
-        // JavaScript for Dark Mode Toggle
         const toggleSwitch = document.getElementById('theme-toggle');
         const bodyElement = document.body;
         const iconElement = document.getElementById('toggle-icon');
