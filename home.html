@@ -3,78 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tilted's Gaming Grounds</title>
+    <title>Home - Tilted's Gaming Grounds</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
+
     <style>
-        /* General styles for the home page */
+        /* Default light mode styles */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: white;
+            color: black;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s, color 0.3s;
         }
+
+        h1, h2, p, a {
+            color: black;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        body.dark-mode h1, 
+        body.dark-mode h2, 
+        body.dark-mode p, 
+        body.dark-mode a {
+            color: white;
+        }
+
+        /* Header styling */
         header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
+            background: #333;
+            color: white;
+            padding: 1.5rem 0;
             text-align: center;
+            position: relative;
         }
-        nav a {
-            color: #fff;
+
+        header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
             text-decoration: none;
-            margin: 0 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            transition: color 0.3s;
         }
-        .banner {
-            background: url('your-banner-image.jpg') no-repeat center center;
-            background-size: cover;
-            height: 300px;
+
+        nav ul li a:hover {
+            color: #ff5722;
+        }
+
+        .toggle-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-align: center;
+            cursor: pointer;
         }
-        .banner h1 {
-            font-size: 3em;
+
+        .toggle-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
         }
-        .content {
-            padding: 20px;
-            text-align: center;
+
+        .toggle-text {
+            font-size: 1rem;
         }
-        footer {
-            background-color: #333;
-            color: #fff;
+
+        /* Main content styling */
+        .main-content {
             text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+            padding: 2rem;
+        }
+
+        .main-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            margin: 1rem 0;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .main-content h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header with Dark Mode Toggle -->
     <header>
-        <h1>Tilted's Gaming Grounds</h1>
+        <h1>Welcome to Tilted's Gaming Grounds</h1>
         <nav>
-            <a href="home.html">Home</a>
-            <a href="featured.html">Featured Games</a>
-            <a href="community.html">Community</a>
-            <a href="contact.html">Contact</a>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="featured.html">Featured Games</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </nav>
+        <div class="toggle-switch" id="theme-toggle">
+            <span class="toggle-icon" id="toggle-icon">🌞</span>
+            <span class="toggle-text">Light Mode</span>
+        </div>
     </header>
 
-    <div class="banner">
-        <h1>Welcome to Tilted's Gaming Grounds</h1>
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Explore Our Gaming World!</h2>
+        <p>Discover exciting games, join our community, and stay updated with the latest news!</p>
     </div>
 
-    <div class="content">
-        <h2>Your go-to place for the latest games and gaming news!</h2>
-        <p>Discover exciting new games, join our community, and stay updated with the latest in gaming.</p>
-    </div>
+    <script>
+        // JavaScript for Dark Mode Toggle
+        const toggleSwitch = document.getElementById('theme-toggle');
+        const bodyElement = document.body;
+        const iconElement = document.getElementById('toggle-icon');
+        const textElement = document.querySelector('.toggle-text');
 
-    <footer>
-        <p>&copy; 2024 Tilted's Gaming Grounds. All rights reserved.</p>
-    </footer>
+        // Load theme from localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            bodyElement.classList.add('dark-mode');
+            iconElement.textContent = '🌜';
+            textElement.textContent = 'Dark Mode';
+        }
+
+        toggleSwitch.addEventListener('click', () => {
+            // Toggle the 'dark-mode' class on the body
+            bodyElement.classList.toggle('dark-mode');
+
+            // Change the icon and text based on mode
+            if (bodyElement.classList.contains('dark-mode')) {
+                iconElement.textContent = '🌜'; // Moon icon for dark mode
+                textElement.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                iconElement.textContent = '🌞'; // Sun icon for light mode
+                textElement.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
 </body>
 </html>
