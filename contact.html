@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Tilted's Gaming Grounds</title>
+    <title>Contact - Tilted's Gaming Grounds</title>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
@@ -22,25 +22,6 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        h1, h2, p, a, button {
-            color: black;
-        }
-
-        /* Dark mode styles */
-        body.dark-mode {
-            background-color: #1e1e1e;
-            color: white;
-        }
-
-        body.dark-mode h1, 
-        body.dark-mode h2, 
-        body.dark-mode p, 
-        body.dark-mode a, 
-        body.dark-mode button {
-            color: white;
-        }
-
-        /* Header styling */
         header {
             background: #333;
             color: white;
@@ -99,67 +80,97 @@
             font-size: 1rem;
         }
 
-        /* Main content styling */
-        .main-content {
+        .contact-content {
             text-align: center;
             padding: 2rem;
         }
 
-        .main-content h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
-            margin: 1rem 0;
+        .contact-content p {
+            margin-bottom: 1rem;
         }
 
-        .contact-button {
-            background-color: #ff5722;
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-buttons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #ddd;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 1.5rem;
+            color: black;
+            transition: background 0.3s;
+        }
+
+        .social-buttons a:hover {
+            background: #ff5722;
+            color: white;
+        }
+
+        .discord-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .discord-icon button {
+            background: #7289da;
             border: none;
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1.2rem;
-            transition: background-color 0.3s, opacity 0.5s;
+            transition: opacity 0.3s;
         }
 
-        .contact-button:hover {
-            background-color: #e64a19;
+        .discord-icon button.clicked {
+            opacity: 0;
         }
 
-        .contact-button img {
-            width: 24px;
-            vertical-align: middle;
-            margin-right: 0.5rem;
-        }
-
-        .message {
-            margin-top: 1rem;
-            font-size: 1.2rem;
+        .discord-message {
             display: none;
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #ff5722;
         }
 
-        /* Dark mode adjustments */
-        body.dark-mode .contact-button {
-            background-color: #e64a19;
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: white;
         }
 
-        body.dark-mode .contact-button:hover {
-            background-color: #ff5722;
+        body.dark-mode header {
+            background: #333;
         }
 
-        body.dark-mode .message {
-            color: #e0e0e0;
+        body.dark-mode .contact-content p {
+            color: white;
         }
 
-        /* Responsive styling */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
-            }
+        body.dark-mode .social-buttons a {
+            background: #333;
+            color: white;
+        }
 
-            .main-content h2 {
-                font-size: 2rem;
-            }
+        body.dark-mode .social-buttons a:hover {
+            background: #ff5722;
+            color: white;
+        }
+
+        body.dark-mode .discord-icon button {
+            background: #5a6e9f;
+        }
+
+        body.dark-mode .discord-message {
+            color: #ff5722;
         }
     </style>
 </head>
@@ -171,7 +182,6 @@
             <ul>
                 <li><a href="home.html">Home</a></li>
                 <li><a href="featured.html">Featured Games</a></li>
-                <li><a href="tournaments.html">Tournaments</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="community.html">Community</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -183,24 +193,16 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <h2>Get in Touch!</h2>
-        <button class="contact-button" id="discord-button">
-            <img src="https://img.icons8.com/material-outlined/24/000000/discord.png" alt="Discord Icon"/>
-            Contact on Discord
-        </button>
-        <p class="message" id="discord-message">Any ideas send them to @The_Tilted_Gamer on Discord</p>
-        
-        <div style="margin-top: 2rem;">
-            <a href="https://www.youtube.com/@Tilted_Gamer" target="_blank" class="contact-button">
-                <img src="https://img.icons8.com/material-outlined/24/000000/youtube.png" alt="YouTube Icon"/>
-                Visit our YouTube
-            </a>
-            <a href="https://www.tiktok.com/@the_tilted_gamer" target="_blank" class="contact-button" style="margin-left: 1rem;">
-                <img src="https://img.icons8.com/material-outlined/24/000000/tiktok.png" alt="TikTok Icon"/>
-                Follow us on TikTok
-            </a>
+    <!-- Contact Content -->
+    <div class="contact-content">
+        <p>If you have any questions or suggestions, feel free to reach out!</p>
+        <div class="discord-icon">
+            <button id="discord-button">Send Ideas</button>
+            <p id="discord-message" class="discord-message">Any ideas send them to @The_Tilted_Gamer on Discord</p>
+        </div>
+        <div class="social-buttons">
+            <a href="https://www.youtube.com/@Tilted_Gamer" target="_blank" title="YouTube">📹</a>
+            <a href="https://www.tiktok.com/@the_tilted_gamer" target="_blank" title="TikTok">🎵</a>
         </div>
     </div>
 
@@ -235,15 +237,13 @@
             }
         });
 
-        // JavaScript for Discord Button
+        // JavaScript for Discord button fade effect
         const discordButton = document.getElementById('discord-button');
         const discordMessage = document.getElementById('discord-message');
 
         discordButton.addEventListener('click', () => {
-            discordButton.style.opacity = '0';
-            setTimeout(() => {
-                discordMessage.style.display = 'block';
-            }, 500); // Matches the fade-out duration
+            discordButton.classList.add('clicked');
+            discordMessage.style.display = 'block';
         });
     </script>
 </body>
