@@ -29,13 +29,16 @@
             text-decoration: none;
             margin: 0 15px;
         }
-        .chat-container {
+        .container {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-top: 0;
         }
         #messages {
             list-style: none;
@@ -109,12 +112,12 @@
         </nav>
     </header>
 
-    <main class="chat-container">
+    <div class="container">
         <h2>Ideas Channel</h2>
         <ul id="messages"></ul>
         <input type="text" id="message-input" placeholder="Type your message here">
         <button id="send-button">Send</button>
-    </main>
+    </div>
 
     <footer>
         <button class="discord-button" id="discord-button">Discord</button>
