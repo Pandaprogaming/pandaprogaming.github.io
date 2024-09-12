@@ -104,12 +104,6 @@
             text-align: center;
         }
 
-        .main-content h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
-            margin: 1rem 0;
-        }
-
         .button {
             background: #ff5722;
             color: white;
@@ -128,28 +122,55 @@
             background: #e64a19;
         }
 
-        .discord-button {
-            position: relative;
-        }
-
-        .discord-button:focus {
-            outline: none;
-        }
-
-        .discord-message {
+        /* Popup styling */
+        .popup {
             display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: #333;
             color: white;
-            padding: 1rem;
-            border-radius: 5px;
-            position: absolute;
-            top: 2rem;
-            right: 0;
-            width: 250px;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             text-align: center;
+            z-index: 1000;
         }
 
-        .discord-button.clicked .discord-message {
+        .popup.active {
+            display: block;
+        }
+
+        .popup button {
+            background: #ff5722;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            margin-top: 1rem;
+        }
+
+        .popup button:hover {
+            background: #e64a19;
+        }
+
+        /* Overlay styling */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
             display: block;
         }
 
@@ -173,7 +194,8 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="featured.html">Featured Games</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="blog.html" id="blog-button">Blog</a></li>
+                <li><a href="community.html">Community</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -185,13 +207,18 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <h2>Get in Touch</h2>
-        <a href="https://discord.gg/VkWvgyqjue" class="button discord-button" id="discord-button">Join Our Discord</a>
-        <div class="discord-message">
-            Any ideas send them to @The_Tilted_Gamer on Discord
-        </div>
-        <a href="https://youtube.com/@tilted_gamer" class="button">YouTube</a>
-        <a href="https://tiktok.com/@the_tilted_gamer" class="button">TikTok</a>
+        <h2>Get in Touch!</h2>
+        <p>Reach out to us through our contact form or connect with us on social media.</p>
+        <a href="https://discord.gg/VkWvgyqjue" class="button">Join our Discord</a>
+        <a href="https://youtube.com/@tilted_gamer" class="button">Our YouTube</a>
+        <a href="https://tiktok.com/@the_tilted_gamer" class="button">Our TikTok</a>
+    </div>
+
+    <!-- Popup -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <p>Under Construction</p>
+        <button onclick="closePopup()">OK</button>
     </div>
 
     <script>
@@ -225,12 +252,24 @@
             }
         });
 
-        // JavaScript for Discord Button
-        const discordButton = document.getElementById('discord-button');
-        discordButton.addEventListener('click', (e) => {
+        // JavaScript for Blog Button Popup
+        const blogButton = document.getElementById('blog-button');
+        const popup = document.getElementById('popup');
+        const overlay = document.getElementById('overlay');
+
+        blogButton.addEventListener('click', (e) => {
             e.preventDefault();
-            discordButton.classList.add('clicked');
+            popup.classList.add('active');
+            overlay.classList.add('active');
         });
+
+        function closePopup() {
+            popup.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Click outside the popup to close
+        overlay.addEventListener('click', closePopup);
     </script>
 </body>
 </html>
