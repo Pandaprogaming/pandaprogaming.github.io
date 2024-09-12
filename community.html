@@ -4,311 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community - Tilted's Gaming Grounds</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="styles.css">
-
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
     <style>
-        /* Default light mode styles */
+        /* Basic styles for the chat room */
         body {
-            background-color: white;
-            color: black;
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
         }
-
-        header {
-            background: #333;
-            color: white;
-            padding: 1.5rem 0;
-            text-align: center;
-            position: relative;
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        header h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.5rem;
-            letter-spacing: 3px;
-            margin: 0;
-        }
-
-        nav ul {
+        #messages {
             list-style: none;
             padding: 0;
-            margin: 1rem 0;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        nav ul li {
-            display: inline;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #ff5722;
-        }
-
-        .toggle-switch {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .toggle-icon {
-            font-size: 1.5rem;
-            margin-right: 0.5rem;
-        }
-
-        .toggle-text {
-            font-size: 1rem;
-        }
-
-        .chat-container {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-        }
-
-        .channel-list {
-            width: 250px;
-            background: #f5f5f5;
-            border-right: 1px solid #ddd;
-            overflow-y: auto;
-        }
-
-        .channel-list h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
             margin: 0;
-            padding: 1rem;
-            background: #ddd;
-            border-bottom: 1px solid #bbb;
+            max-height: 300px;
+            overflow-y: scroll;
         }
-
-        .channel-item {
-            padding: 1rem;
+        #messages li {
+            padding: 10px;
             border-bottom: 1px solid #ddd;
-            cursor: pointer;
-            transition: background 0.3s;
         }
-
-        .channel-item:hover {
-            background: #eee;
-        }
-
-        .chat-box {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            background: #fff;
-            overflow: hidden;
-        }
-
-        .messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1rem;
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-            border-radius: 5px;
-        }
-
-        .message.user {
-            background: #f0f0f0;
-            align-self: flex-end;
-        }
-
-        .message.bot {
-            background: #e0e0e0;
-        }
-
-        .message-input {
-            display: flex;
-            border-top: 1px solid #ddd;
-            padding: 1rem;
-            background: #f5f5f5;
-        }
-
-        .message-input input {
-            flex: 1;
-            padding: 0.5rem;
+        #message-input {
+            width: 100%;
+            padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-right: 0.5rem;
+            border-radius: 4px;
         }
-
-        .message-input button {
-            padding: 0.5rem 1rem;
-            background: #ff5722;
+        #send-button {
+            padding: 10px 20px;
             border: none;
-            color: white;
-            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background-color 0.3s;
         }
-
-        .message-input button:hover {
-            background: #e64a19;
-        }
-
-        /* Dark mode styles */
-        body.dark-mode {
-            background-color: #1e1e1e;
-            color: white;
-        }
-
-        body.dark-mode header {
-            background: #333;
-        }
-
-        body.dark-mode .channel-list {
-            background: #2c2c2c;
-        }
-
-        body.dark-mode .channel-item {
-            border-bottom: 1px solid #444;
-        }
-
-        body.dark-mode .chat-box {
-            background: #2c2c2c;
-        }
-
-        body.dark-mode .messages .message.user {
-            background: #333;
-        }
-
-        body.dark-mode .messages .message.bot {
-            background: #444;
-        }
-
-        body.dark-mode .message-input {
-            background: #2c2c2c;
-        }
-
-        body.dark-mode .message-input input {
-            border: 1px solid #555;
-            background: #3c3c3c;
-            color: white;
-        }
-
-        body.dark-mode .message-input button {
-            background: #e64a19;
-        }
-
-        body.dark-mode .message-input button:hover {
-            background: #ff5722;
-        }
-
-        /* Responsive styling */
-        @media (max-width: 768px) {
-            .channel-list {
-                display: none;
-            }
-
-            .chat-container {
-                flex-direction: column;
-            }
+        #send-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <!-- Header with Dark Mode Toggle -->
     <header>
-        <h1>Community Chat</h1>
+        <h1>Community Chat Room</h1>
         <nav>
-            <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="featured.html">Featured Games</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="community.html">Community</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+            <a href="home.html">Home</a>
+            <a href="featured.html">Featured Games</a>
+            <a href="community.html">Community</a>
+            <a href="contact.html">Contact</a>
         </nav>
-        <div class="toggle-switch" id="theme-toggle">
-            <span class="toggle-icon" id="toggle-icon">🌞</span>
-            <span class="toggle-text">Light Mode</span>
-        </div>
     </header>
 
-    <!-- Chat Container -->
-    <div class="chat-container">
-        <!-- Channel List -->
-        <div class="channel-list">
-            <h2>Channels</h2>
-            <div class="channel-item">General Chat</div>
-            <div class="channel-item">Game Discussions</div>
-            <div class="channel-item">Support</div>
-            <div class="channel-item">Off-Topic</div>
-        </div>
+    <main class="chat-container">
+        <h2>Ideas Channel</h2>
+        <ul id="messages"></ul>
+        <input type="text" id="message-input" placeholder="Type your message here">
+        <button id="send-button">Send</button>
+    </main>
 
-        <!-- Chat Box -->
-        <div class="chat-box">
-            <div class="messages">
-                <div class="message user">Hello! How's everyone doing today?</div>
-                <div class="message bot">Hi there! I'm doing great, thanks for asking!</div>
-                <!-- More messages here -->
-            </div>
-            <div class="message-input">
-                <input type="text" placeholder="Type your message here...">
-                <button>Send</button>
-            </div>
-        </div>
-    </div>
+    <footer>
+        <p>&copy; 2024 Tilted's Gaming Grounds. All rights reserved.</p>
+    </footer>
 
+    <!-- Firebase Configuration -->
     <script>
-        // JavaScript for Dark Mode Toggle
-        const toggleSwitch = document.getElementById('theme-toggle');
-        const bodyElement = document.body;
-        const iconElement = document.getElementById('toggle-icon');
-        const textElement = document.querySelector('.toggle-text');
-
-        // Load theme from localStorage
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            bodyElement.classList.add('dark-mode');
-            iconElement.textContent = '🌜';
-            textElement.textContent = 'Dark Mode';
-        }
-
-        toggleSwitch.addEventListener('click', () => {
-            // Toggle the 'dark-mode' class on the body
-            bodyElement.classList.toggle('dark-mode');
-
-            // Change the icon and text based on mode
-            if (bodyElement.classList.contains('dark-mode')) {
-                iconElement.textContent = '🌜'; // Moon icon for dark mode
-                textElement.textContent = 'Dark Mode';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                iconElement.textContent = '🌞'; // Sun icon for light mode
-                textElement.textContent = 'Light Mode';
-                localStorage.setItem('theme', 'light');
-            }
-        });
-    </script>
-</body>
-</html>
+       
