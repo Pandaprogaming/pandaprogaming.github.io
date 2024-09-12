@@ -141,6 +141,58 @@
             text-align: center;
         }
 
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 80%;
+            height: 80%;
+            max-width: 800px;
+            max-height: 600px;
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
         /* Responsive styling */
         @media (max-width: 768px) {
             header h1 {
@@ -178,39 +230,47 @@
         <div class="game-card">
             <img src="game1-thumbnail.jpg" alt="Game 1">
             <div class="game-info">
-                <h3>SUper Mario 64</h3>
-                <a href="https://supermario64.glitch.me" class="game-button" target="_blank">Play Now</a>
+                <button class="game-button" data-url="https://supermario64.glitch.me">Play Game 1</button>
             </div>
         </div>
         <div class="game-card">
             <img src="game2-thumbnail.jpg" alt="Game 2">
             <div class="game-info">
-                <h3>Game 2</h3>
-                <a href="https://example.com/game2" class="game-button" target="_blank">Play Now</a>
+                <button class="game-button" data-url="https://supermario64.glitch.me">Play Game 2</button>
             </div>
         </div>
         <div class="game-card">
             <img src="game3-thumbnail.jpg" alt="Game 3">
             <div class="game-info">
-                <h3>Game 3</h3>
-                <a href="https://example.com/game3" class="game-button" target="_blank">Play Now</a>
+                <button class="game-button" data-url="https://supermario64.glitch.me">Play Game 3</button>
             </div>
         </div>
         <div class="game-card">
             <img src="game4-thumbnail.jpg" alt="Game 4">
             <div class="game-info">
-                <h3>Game 4</h3>
-                <a href="https://example.com/game4" class="game-button" target="_blank">Play Now</a>
+                <button class="game-button" data-url="https://supermario64.glitch.me">Play Game 4</button>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript for Dark Mode Toggle -->
+    <!-- Modal -->
+    <div class="modal" id="game-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="close-modal">&times;</button>
+            <iframe id="game-iframe" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <!-- JavaScript for Dark Mode Toggle and Modal -->
     <script>
         const toggleSwitch = document.getElementById('theme-toggle');
         const bodyElement = document.body;
         const iconElement = document.getElementById('toggle-icon');
         const textElement = document.querySelector('.toggle-text');
+        const gameButtons = document.querySelectorAll('.game-button');
+        const modal = document.getElementById('game-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        const gameIframe = document.getElementById('game-iframe');
 
         // Load theme from localStorage
         const savedTheme = localStorage.getItem('theme');
@@ -233,6 +293,28 @@
                 iconElement.textContent = '🌞'; // Sun icon for light mode
                 textElement.textContent = 'Light Mode';
                 localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Modal functionality
+        gameButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const url = button.getAttribute('data-url');
+                gameIframe.src = url;
+                modal.classList.add('active');
+            });
+        });
+
+        closeModalButton.addEventListener('click', () => {
+            modal.classList.remove('active');
+            gameIframe.src = ''; // Clear the iframe src when closing
+        });
+
+        // Click outside the modal to close
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                gameIframe.src = ''; // Clear the iframe src when closing
             }
         });
 
