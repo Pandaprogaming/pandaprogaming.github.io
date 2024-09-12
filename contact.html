@@ -22,6 +22,24 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
+        h1, h2, p, a {
+            color: black;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        body.dark-mode h1, 
+        body.dark-mode h2, 
+        body.dark-mode p, 
+        body.dark-mode a {
+            color: white;
+        }
+
+        /* Header styling */
         header {
             background: #333;
             color: white;
@@ -80,97 +98,70 @@
             font-size: 1rem;
         }
 
-        .contact-content {
-            text-align: center;
+        /* Main content styling */
+        .main-content {
             padding: 2rem;
-        }
-
-        .contact-content p {
-            margin-bottom: 1rem;
-        }
-
-        .social-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-buttons a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: #ddd;
-            border-radius: 50%;
             text-align: center;
-            line-height: 40px;
-            font-size: 1.5rem;
-            color: black;
-            transition: background 0.3s;
         }
 
-        .social-buttons a:hover {
+        .main-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            margin: 1rem 0;
+        }
+
+        .button {
             background: #ff5722;
             color: white;
-        }
-
-        .discord-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .discord-icon button {
-            background: #7289da;
+            padding: 1rem 2rem;
             border: none;
-            color: white;
-            padding: 0.5rem 1rem;
             border-radius: 5px;
             cursor: pointer;
-            transition: opacity 0.3s;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
         }
 
-        .discord-icon button.clicked {
-            opacity: 0;
+        .button:hover {
+            background: #e64a19;
+        }
+
+        .discord-button {
+            position: relative;
+        }
+
+        .discord-button:focus {
+            outline: none;
         }
 
         .discord-message {
             display: none;
-            margin-top: 1rem;
-            font-size: 1rem;
-            color: #ff5722;
-        }
-
-        /* Dark mode styles */
-        body.dark-mode {
-            background-color: #1e1e1e;
-            color: white;
-        }
-
-        body.dark-mode header {
-            background: #333;
-        }
-
-        body.dark-mode .contact-content p {
-            color: white;
-        }
-
-        body.dark-mode .social-buttons a {
             background: #333;
             color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            position: absolute;
+            top: 2rem;
+            right: 0;
+            width: 250px;
+            text-align: center;
         }
 
-        body.dark-mode .social-buttons a:hover {
-            background: #ff5722;
-            color: white;
+        .discord-button.clicked .discord-message {
+            display: block;
         }
 
-        body.dark-mode .discord-icon button {
-            background: #5a6e9f;
-        }
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
 
-        body.dark-mode .discord-message {
-            color: #ff5722;
+            .main-content h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
@@ -183,7 +174,6 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="featured.html">Featured Games</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="community.html">Community</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -193,17 +183,15 @@
         </div>
     </header>
 
-    <!-- Contact Content -->
-    <div class="contact-content">
-        <p>If you have any questions or suggestions, feel free to reach out!</p>
-        <div class="discord-icon">
-            <button id="discord-button">Send Ideas</button>
-            <p id="discord-message" class="discord-message">Any ideas send them to @The_Tilted_Gamer on Discord</p>
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Get in Touch</h2>
+        <a href="https://discord.com" class="button discord-button" id="discord-button">Join Our Discord</a>
+        <div class="discord-message">
+            Any ideas send them to @The_Tilted_Gamer on Discord
         </div>
-        <div class="social-buttons">
-            <a href="https://www.youtube.com/@Tilted_Gamer" target="_blank" title="YouTube">📹</a>
-            <a href="https://www.tiktok.com/@the_tilted_gamer" target="_blank" title="TikTok">🎵</a>
-        </div>
+        <a href="https://youtube.com/@tilted_gamer" class="button">YouTube</a>
+        <a href="https://tiktok.com/@the_tilted_gamer" class="button">TikTok</a>
     </div>
 
     <script>
@@ -237,13 +225,11 @@
             }
         });
 
-        // JavaScript for Discord button fade effect
+        // JavaScript for Discord Button
         const discordButton = document.getElementById('discord-button');
-        const discordMessage = document.getElementById('discord-message');
-
-        discordButton.addEventListener('click', () => {
+        discordButton.addEventListener('click', (e) => {
+            e.preventDefault();
             discordButton.classList.add('clicked');
-            discordMessage.style.display = 'block';
         });
     </script>
 </body>
