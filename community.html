@@ -10,15 +10,28 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js"></script>
     <style>
-        /* Basic styles for the chat room */
+        /* General styles for the community page */
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            background-color: #f4f4f4;
             color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
         }
         .chat-container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -30,16 +43,19 @@
             margin: 0;
             max-height: 300px;
             overflow-y: scroll;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
         }
         #messages li {
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
         #message-input {
-            width: 100%;
+            width: calc(100% - 22px); /* Adjusted width to account for padding and border */
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            margin-right: 10px;
         }
         #send-button {
             padding: 10px 20px;
@@ -51,6 +67,34 @@
         }
         #send-button:hover {
             background-color: #0056b3;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .discord-button {
+            background: #7289da;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .discord-button:hover {
+            background: #5b6eae;
+        }
+        .social-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .social-links a {
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -73,9 +117,72 @@
     </main>
 
     <footer>
+        <button class="discord-button" id="discord-button">Discord</button>
+        <p id="discord-message" style="display: none;">Any ideas send them to @The_Tilted_Gamer on Discord.</p>
+        <div class="social-links">
+            <a href="https://www.youtube.com/yourchannel" target="_blank">YouTube</a>
+            <a href="https://www.tiktok.com/@yourprofile" target="_blank">TikTok</a>
+        </div>
         <p>&copy; 2024 Tilted's Gaming Grounds. All rights reserved.</p>
     </footer>
 
     <!-- Firebase Configuration -->
     <script>
-       
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCDz9DVYDtAAdwu13q_PtwvYU5ImEESXz4",
+            authDomain: "tilteds-gaming-grounds.firebaseapp.com",
+            projectId: "tilteds-gaming-grounds",
+            storageBucket: "tilteds-gaming-grounds.appspot.com",
+            messagingSenderId: "584426167253",
+            appId: "1:584426167253:web:9f0a0a3f78e70c9b38bb5c",
+            measurementId: "G-E5NWG5V5V1"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Initialize Firebase Authentication and Firestore
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Reference to the messages collection
+        const messagesRef = db.collection('messages');
+
+        // Function to send a message
+        document.getElementById('send-button').addEventListener('click', () => {
+            const messageInput = document.getElementById('message-input');
+            const message = messageInput.value.trim();
+            if (message) {
+                messagesRef.add({
+                    text: message,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => {
+                    messageInput.value = ''; // Clear the input
+                }).catch((error) => {
+                    console.error('Error sending message:', error);
+                });
+            }
+        });
+
+        // Function to listen for new messages
+        messagesRef.orderBy('timestamp').onSnapshot(snapshot => {
+            const messagesList = document.getElementById('messages');
+            messagesList.innerHTML = ''; // Clear existing messages
+            snapshot.forEach(doc => {
+                const message = doc.data().text;
+                const li = document.createElement('li');
+                li.textContent = message;
+                messagesList.appendChild(li);
+            });
+        });
+
+        // Discord button functionality
+        document.getElementById('discord-button').addEventListener('click', () => {
+            const discordMessage = document.getElementById('discord-message');
+            discordMessage.style.display = 'block';
+            document.getElementById('discord-button').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
