@@ -176,6 +176,48 @@
             background: #e64a19;
         }
 
+        /* Popup styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+
+        .popup-content.dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        .popup-content button {
+            background: #ff5722;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .popup-content button:hover {
+            background: #e64a19;
+        }
+
         /* Responsive styling */
         @media (max-width: 768px) {
             header h1 {
@@ -199,9 +241,9 @@
         <h1>Featured Games</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="home.html">Home</a></li>
                 <li><a href="featured.html">Featured Games</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#" onclick="showBlogPopup()">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -215,7 +257,7 @@
     <div class="main-content">
         <div class="game-card">
             <img src="game1-thumbnail.jpg" alt="Game 1 Thumbnail">
-            <h3>Game 1</h3>
+            <h3>SM64</h3>
             <button onclick="showGamePopup('game1')">Play Now</button>
         </div>
         <div class="game-card">
@@ -245,20 +287,42 @@
     </div>
 
     <!-- Popups and Overlay -->
+    <div class="popup-overlay" id="popup-overlay">
+        <div class="popup-content" id="popup-content">
+            <p>Under Construction</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
     <div class="overlay" id="game-popup-overlay"></div>
     <div class="popup" id="game-popup">
-        <div id="game-popup-content"></div>
+        <div id="game-embed"></div>
+        <button onclick="window.open('https://supermario64.glitch.me', '_blank')">Want Fullscreen?</button>
         <button onclick="closeGamePopup()">Close</button>
     </div>
 
     <script>
-        // Toggle Dropdown for Minecraft Version
-        function showMinecraftDropdown() {
-            const dropdown = document.getElementById('minecraft-dropdown');
-            dropdown.style.display = (dropdown.style.display === 'block') ? 'none' : 'block';
+        // JavaScript for Blog Popup
+        function showBlogPopup() {
+            const popup = document.getElementById('popup-overlay');
+            popup.style.display = 'flex';
+
+            // Apply dark mode theme to popup
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const popupContent = document.getElementById('popup-content');
+            if (isDarkMode) {
+                popupContent.classList.add('dark-mode');
+            } else {
+                popupContent.classList.remove('dark-mode');
+            }
         }
 
-        // JavaScript for Dark Mode Toggle
+        function closePopup() {
+            const popup = document.getElementById('popup-overlay');
+            popup.style.display = 'none';
+        }
+
+        // Dark Mode Toggle Script
         const toggleSwitch = document.getElementById('theme-toggle');
         const bodyElement = document.body;
         const iconElement = document.getElementById('toggle-icon');
@@ -274,18 +338,40 @@
 
         toggleSwitch.addEventListener('click', () => {
             bodyElement.classList.toggle('dark-mode');
-            if (bodyElement.classList.contains('dark-mode')) {
-                iconElement.textContent = '🌜'; // Moon icon for dark mode
-                textElement.textContent = 'Dark Mode';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                iconElement.textContent = '🌞'; // Sun icon for light mode
-                textElement.textContent = 'Light Mode';
-                localStorage.setItem('theme', 'light');
-            }
+            const isDarkMode = bodyElement.classList.contains('dark-mode');
+            iconElement.textContent = isDarkMode ? '🌜' : '🌞';
+            textElement.textContent = isDarkMode ? 'Dark Mode' : 'Light Mode';
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
 
-            // Update game card theme
-            document.querySelectorAll('.game-card').forEach
-(card => { card.classList.toggle('dark-mode'); }); }); </script>
+            // Apply dark mode to game cards
+            const gameCards = document.querySelectorAll('.game-card');
+            gameCards.forEach(card => {
+                card.classList.toggle('dark-mode', isDarkMode);
+            });
+        });
 
-</body> </html>
+        // Game popup functionality
+        function showGamePopup(gameId) {
+            const gamePopupOverlay = document.getElementById('game-popup-overlay');
+            const gamePopup = document.getElementById('game-popup');
+            const gameEmbed = document.getElementById('game-embed');
+            gameEmbed.innerHTML = `<iframe src="https://supermario64.glitch.me" width="100%" height="500px"></iframe>`;
+            gamePopupOverlay.style.display = 'block';
+            gamePopup.style.display = 'block';
+        }
+
+        function closeGamePopup() {
+            const gamePopupOverlay = document.getElementById('game-popup-overlay');
+            const gamePopup = document.getElementById('game-popup');
+            gamePopupOverlay.style.display = 'none';
+            gamePopup.style.display = 'none';
+        }
+
+        // Minecraft dropdown functionality
+        function showMinecraftDropdown() {
+            const dropdown = document.getElementById('minecraft-dropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
