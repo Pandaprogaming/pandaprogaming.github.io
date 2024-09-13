@@ -175,22 +175,6 @@
             border: none;
         }
 
-        .popup-content button {
-            background: #ff5722;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            margin-top: 1rem;
-            transition: background 0.3s;
-        }
-
-        .popup-content button:hover {
-            background: #e64a19;
-        }
-
         /* Dropdown styles */
         .version-dropdown {
             display: none;
@@ -223,7 +207,7 @@
         <h1>Featured Games</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="home.html">Home</a></li>
                 <li><a href="featured.html">Featured Games</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -268,7 +252,6 @@
     <div class="popup" id="game-popup">
         <div class="popup-content">
             <iframe id="game-iframe"></iframe>
-            <button id="fullscreen-btn" onclick="window.open('https://pandaprogaming.github.io/SM64', '_blank')">Want Fullscreen?</button>
             <button onclick="closeGamePopup()">Close</button>
         </div>
     </div>
@@ -277,8 +260,8 @@
     <div class="version-dropdown" id="version-dropdown">
         <select onchange="launchVersion(this.value)">
             <option value="">Choose a version</option>
-            <option value="https://pandaprogaming.github.io/Minecraft_1.8.8.html">1.8.8</option>
-            <option value="https://pandaprogaming.github.io/Minecraft_1.5.2.html">1.5.2</option>
+            <option value="https://example.com/1.8.8">1.8.8</option>
+            <option value="https://example.com/1.5.2">1.5.2</option>
         </select>
     </div>
 
@@ -333,6 +316,7 @@
             if (game === 'minecraft') {
                 gameIframe.src = ''; // Ensure no previous source
                 document.getElementById('version-dropdown').style.display = 'block';
+                fullscreenBtn.style.display = 'none'; // Remove fullscreen button
             } else {
                 gameIframe.src = `https://supermario64.glitch.me`; // Example for other games
                 fullscreenBtn.style.display = 'block';
