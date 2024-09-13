@@ -39,16 +39,81 @@
             color: white;
         }
 
+        /* Header styling */
+        header {
+            background: #333;
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 3px;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff5722;
+        }
+
+        .toggle-switch {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .toggle-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .toggle-text {
+            font-size: 1rem;
+        }
+
+        /* Main content styling */
+        .main-content {
+            text-align: center;
+            padding: 2rem;
+        }
+
         .game-card {
-            background: #fff;
-            border-radius: 10px;
+            background: #f0f0f0;
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 1rem;
-            overflow: hidden;
-            transition: background-color 0.3s, color 0.3s;
+            padding: 1.5rem;
             display: inline-block;
-            width: calc(50% - 2rem);
-            text-align: center;
+            width: 250px;
+            text-align: left;
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .game-card.dark-mode {
@@ -56,146 +121,99 @@
             color: white;
         }
 
-        .game-card img {
-            width: 100%;
-            height: auto;
+        .game-card h3 {
+            margin: 0;
+            font-size: 1.5rem;
         }
 
-        .game-card h3 {
-            margin: 0.5rem 0;
+        .game-card p {
+            font-size: 1rem;
         }
 
         .game-card button {
             background: #ff5722;
             border: none;
+            border-radius: 4px;
             color: white;
-            padding: 0.5rem 1rem;
             cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            margin-top: 0.5rem;
+            transition: background 0.3s;
         }
 
         .game-card button:hover {
             background: #e64a19;
         }
 
-        .dropdown {
+        /* Popup styling */
+        .popup {
             display: none;
-            position: absolute;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 0.5rem;
-            z-index: 1000;
-        }
-
-        .dropdown button {
-            display: block;
-            background: #ff5722;
-            border: none;
-            color: white;
-            padding: 0.5rem;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-bottom: 0.5rem;
-        }
-
-        .dropdown button:hover {
-            background: #e64a19;
-        }
-
-        /* Popup styles */
-        .popup-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            display: none;
             justify-content: center;
             align-items: center;
-            z-index: 999;
         }
 
         .popup-content {
-            background-color: white;
+            background: white;
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 8px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 300px;
+            position: relative;
+            width: 80%;
+            max-width: 600px;
         }
 
-        .popup-content.dark-mode {
-            background-color: #333;
-            color: white;
+        .popup-content iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
         }
 
         .popup-content button {
             background: #ff5722;
             border: none;
+            border-radius: 4px;
             color: white;
-            padding: 0.5rem 1rem;
             cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            transition: background 0.3s;
         }
 
         .popup-content button:hover {
             background: #e64a19;
         }
 
-        /* Game embed popup */
-        .game-popup {
+        /* Dropdown styles */
+        .version-dropdown {
             display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            width: 80%;
-            height: 80%;
-            overflow: hidden;
-        }
-
-        .game-popup iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .game-popup .close-btn {
-            background: #ff5722;
-            border: none;
-            color: white;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-radius: 5px;
             position: absolute;
-            top: 10px;
-            right: 10px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            top: 50px;
+            left: 0;
+            z-index: 10;
+            width: 150px;
         }
 
-        /* Responsive styling */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5rem;
-            }
+        .version-dropdown select {
+            width: 100%;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
 
-            .main-content h2 {
-                font-size: 2rem;
-            }
-
-            .game-card {
-                width: 100%;
-                margin: 1rem 0;
-            }
+        .version-dropdown option {
+            padding: 0.5rem;
         }
     </style>
 </head>
@@ -205,9 +223,9 @@
         <h1>Featured Games</h1>
         <nav>
             <ul>
-                <li><a href="home.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="featured.html">Featured Games</a></li>
-                <li><a href="#" onclick="showBlogPopup()">Blog</a></li>
+                <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -219,47 +237,55 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="game-card">
-            <img src="game1-thumbnail.jpg" alt="Game 1 Thumbnail">
-            <h3>SM64</h3>
-            <button onclick="showGamePopup('game1')">Play Now</button>
+        <div class="game-card" onclick="showGamePopup('game1')">
+            <h3>Game 1</h3>
+            <p>Exciting platformer game!</p>
+            <button>Play Now</button>
         </div>
-        <div class="game-card">
-            <img src="game2-thumbnail.jpg" alt="Game 2 Thumbnail">
+        <div class="game-card" onclick="showGamePopup('game2')">
             <h3>Game 2</h3>
-            <button onclick="showGamePopup('game2')">Play Now</button>
+            <p>Action-packed adventure!</p>
+            <button>Play Now</button>
         </div>
-        <div class="game-card">
-            <img src="game3-thumbnail.jpg" alt="Game 3 Thumbnail">
+        <div class="game-card" onclick="showGamePopup('game3')">
             <h3>Game 3</h3>
-            <button onclick="showGamePopup('game3')">Play Now</button>
+            <p>Strategic puzzle game!</p>
+            <button>Play Now</button>
         </div>
-        <div class="game-card">
-            <img src="game4-thumbnail.jpg" alt="Game 4 Thumbnail">
+        <div class="game-card" onclick="showGamePopup('game4')">
             <h3>Game 4</h3>
-            <button onclick="showGamePopup('game4')">Play Now</button>
+            <p>Thrilling racing game!</p>
+            <button>Play Now</button>
         </div>
-        <div class="game-card">
-            <img src="minecraft-thumbnail.jpg" alt="Minecraft Thumbnail">
+        <div class="game-card" onclick="showGamePopup('minecraft')">
             <h3>Minecraft</h3>
-            <button onclick="showVersionDropdown()">Play Now</button>
-            <div id="version-dropdown" class="dropdown">
-                <button onclick="window.open('https://pandaprogaming.github.io/Minecraft_1.8.8.html', '_blank')">1.8.8</button>
-                <button onclick="window.open('https://pandaprogaming.github.io/Minecraft_1.5.2.html', '_blank')">1.5.2</button>
-            </div>
+            <p>Classic sandbox game!</p>
+            <button>Play Now</button>
         </div>
     </div>
 
-    <!-- Game Popup -->
-    <div id="game-popup" class="game-popup">
-        <button class="close-btn" onclick="closeGamePopup()">Close</button>
-        <iframe src="" id="game-iframe"></iframe>
+    <!-- Popup for Game -->
+    <div class="popup" id="game-popup">
+        <div class="popup-content">
+            <iframe id="game-iframe"></iframe>
+            <button id="fullscreen-btn" onclick="window.open('https://pandaprogaming.github.io/SM64', '_blank')">Want Fullscreen?</button>
+            <button onclick="closeGamePopup()">Close</button>
+        </div>
+    </div>
+
+    <!-- Version Dropdown -->
+    <div class="version-dropdown" id="version-dropdown">
+        <select onchange="launchVersion(this.value)">
+            <option value="">Choose a version</option>
+            <option value="https://pandaprogaming.github.io/Minecraft_1.8.8.html">1.8.8</option>
+            <option value="https://pandaprogaming.github.io/Minecraft_1.5.2.html">1.5.2</option>
+        </select>
     </div>
 
     <!-- Blog Popup -->
-    <div id="blog-popup" class="popup-overlay">
+    <div class="popup" id="blog-popup">
         <div class="popup-content">
-            <p>Under Construction</p>
+            <h2>Under Construction</h2>
             <button onclick="closeBlogPopup()">Close</button>
         </div>
     </div>
@@ -284,52 +310,67 @@
         toggleSwitch.addEventListener('click', () => {
             // Toggle the 'dark-mode' class on the body
             bodyElement.classList.toggle('dark-mode');
-            gameCards.forEach(card => card.classList.toggle('dark-mode'));
 
             // Change the icon and text based on mode
             if (bodyElement.classList.contains('dark-mode')) {
                 iconElement.textContent = '🌜'; // Moon icon for dark mode
                 textElement.textContent = 'Dark Mode';
                 localStorage.setItem('theme', 'dark');
+                gameCards.forEach(card => card.classList.add('dark-mode'));
             } else {
                 iconElement.textContent = '🌞'; // Sun icon for light mode
                 textElement.textContent = 'Light Mode';
                 localStorage.setItem('theme', 'light');
+                gameCards.forEach(card => card.classList.remove('dark-mode'));
             }
         });
 
-        // JavaScript for Game Popup
         function showGamePopup(game) {
-            const popup = document.getElementById('game-popup');
-            const iframe = document.getElementById('game-iframe');
+            const gamePopup = document.getElementById('game-popup');
+            const gameIframe = document.getElementById('game-iframe');
             const fullscreenBtn = document.getElementById('fullscreen-btn');
 
-            if (game === 'game1') {
-                iframe.src = 'https://supermario64.glitch.me';
-                fullscreenBtn.style.display = 'block';
+            if (game === 'minecraft') {
+                gameIframe.src = ''; // Ensure no previous source
+                document.getElementById('version-dropdown').style.display = 'block';
             } else {
-                iframe.src = '';
-                fullscreenBtn.style.display = 'none';
+                gameIframe.src = `https://supermario64.glitch.me`; // Example for other games
+                fullscreenBtn.style.display = 'block';
+                document.getElementById('version-dropdown').style.display = 'none';
             }
 
-            popup.style.display = 'flex';
+            gamePopup.style.display = 'flex';
         }
 
         function closeGamePopup() {
             document.getElementById('game-popup').style.display = 'none';
         }
 
-        function showVersionDropdown() {
-            document.getElementById('version-dropdown').style.display = 'block';
+        function launchVersion(url) {
+            if (url) {
+                window.open(url, '_blank');
+            }
         }
 
         function closeBlogPopup() {
             document.getElementById('blog-popup').style.display = 'none';
         }
 
-        function showBlogPopup() {
+        document.querySelectorAll('.game-card button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                event.preventDefault();
+                if (event.currentTarget.closest('.game-card').querySelector('h3').textContent === 'Minecraft') {
+                    showGamePopup('minecraft');
+                } else {
+                    showGamePopup('other');
+                }
+            });
+        });
+
+        document.querySelector('a[href="blog.html"]').addEventListener('click', (event) => {
+            event.preventDefault();
             document.getElementById('blog-popup').style.display = 'flex';
-        }
+        });
     </script>
 </body>
 </html>
