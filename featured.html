@@ -1,34 +1,335 @@
-<script>
-    // JavaScript for Dark Mode Toggle
-    const toggleSwitch = document.getElementById('theme-toggle');
-    const bodyElement = document.body;
-    const iconElement = document.getElementById('toggle-icon');
-    const textElement = document.querySelector('.toggle-text');
-    const gameCards = document.querySelectorAll('.game-card');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Games - Tilted's Gaming Grounds</title>
 
-    // Load theme from localStorage
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        bodyElement.classList.add('dark-mode');
-        iconElement.textContent = '🌜';
-        textElement.textContent = 'Dark Mode';
-        gameCards.forEach(card => card.classList.add('dark-mode'));
-    }
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
-    toggleSwitch.addEventListener('click', () => {
-        // Toggle the 'dark-mode' class on the body
-        bodyElement.classList.toggle('dark-mode');
-        gameCards.forEach(card => card.classList.toggle('dark-mode'));
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
 
-        // Change the icon and text based on mode
-        if (bodyElement.classList.contains('dark-mode')) {
-            iconElement.textContent = '🌜'; // Moon icon for dark mode
-            textElement.textContent = 'Dark Mode';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            iconElement.textContent = '🌞'; // Sun icon for light mode
-            textElement.textContent = 'Light Mode';
-            localStorage.setItem('theme', 'light');
+    <style>
+        /* Default light mode styles */
+        body {
+            background-color: white;
+            color: black;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
         }
-    });
-</script>
+
+        h1, h2, p, a {
+            color: black;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        body.dark-mode h1, 
+        body.dark-mode h2, 
+        body.dark-mode p, 
+        body.dark-mode a {
+            color: white;
+        }
+
+        .game-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 1rem;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+            display: inline-block;
+            width: calc(50% - 2rem);
+            text-align: center;
+        }
+
+        .game-card.dark-mode {
+            background: #333;
+            color: white;
+        }
+
+        .game-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .game-card h3 {
+            margin: 0.5rem 0;
+        }
+
+        .game-card button {
+            background: #ff5722;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .game-card button:hover {
+            background: #e64a19;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem;
+            z-index: 1000;
+        }
+
+        .dropdown button {
+            display: block;
+            background: #ff5722;
+            border: none;
+            color: white;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .dropdown button:hover {
+            background: #e64a19;
+        }
+
+        /* Popup styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+        }
+
+        .popup-content.dark-mode {
+            background-color: #333;
+            color: white;
+        }
+
+        .popup-content button {
+            background: #ff5722;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .popup-content button:hover {
+            background: #e64a19;
+        }
+
+        /* Game embed popup */
+        .game-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 80%;
+            height: 80%;
+            overflow: hidden;
+        }
+
+        .game-popup iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .game-popup .close-btn {
+            background: #ff5722;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .main-content h2 {
+                font-size: 2rem;
+            }
+
+            .game-card {
+                width: 100%;
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Dark Mode Toggle -->
+    <header>
+        <h1>Featured Games</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="featured.html">Featured Games</a></li>
+                <li><a href="#" onclick="showBlogPopup()">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="toggle-switch" id="theme-toggle">
+            <span class="toggle-icon" id="toggle-icon">🌞</span>
+            <span class="toggle-text">Light Mode</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="game-card">
+            <img src="game1-thumbnail.jpg" alt="Game 1 Thumbnail">
+            <h3>SM64</h3>
+            <button onclick="showGamePopup('game1')">Play Now</button>
+        </div>
+        <div class="game-card">
+            <img src="game2-thumbnail.jpg" alt="Game 2 Thumbnail">
+            <h3>Game 2</h3>
+            <button onclick="showGamePopup('game2')">Play Now</button>
+        </div>
+        <div class="game-card">
+            <img src="game3-thumbnail.jpg" alt="Game 3 Thumbnail">
+            <h3>Game 3</h3>
+            <button onclick="showGamePopup('game3')">Play Now</button>
+        </div>
+        <div class="game-card">
+            <img src="game4-thumbnail.jpg" alt="Game 4 Thumbnail">
+            <h3>Game 4</h3>
+            <button onclick="showGamePopup('game4')">Play Now</button>
+        </div>
+        <div class="game-card">
+            <img src="minecraft-thumbnail.jpg" alt="Minecraft Thumbnail">
+            <h3>Minecraft</h3>
+            <button onclick="showVersionDropdown()">Play Now</button>
+            <div id="version-dropdown" class="dropdown">
+                <button onclick="window.open('https://pandaprogaming.github.io/Minecraft_1.8.8.html', '_blank')">1.8.8</button>
+                <button onclick="window.open('https://pandaprogaming.github.io/Minecraft_1.5.2.html', '_blank')">1.5.2</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Popup -->
+    <div id="game-popup" class="game-popup">
+        <button class="close-btn" onclick="closeGamePopup()">Close</button>
+        <iframe src="" id="game-iframe"></iframe>
+    </div>
+
+    <!-- Blog Popup -->
+    <div id="blog-popup" class="popup-overlay">
+        <div class="popup-content">
+            <p>Under Construction</p>
+            <button onclick="closeBlogPopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Dark Mode Toggle
+        const toggleSwitch = document.getElementById('theme-toggle');
+        const bodyElement = document.body;
+        const iconElement = document.getElementById('toggle-icon');
+        const textElement = document.querySelector('.toggle-text');
+        const gameCards = document.querySelectorAll('.game-card');
+
+        // Load theme from localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            bodyElement.classList.add('dark-mode');
+            iconElement.textContent = '🌜';
+            textElement.textContent = 'Dark Mode';
+            gameCards.forEach(card => card.classList.add('dark-mode'));
+        }
+
+        toggleSwitch.addEventListener('click', () => {
+            // Toggle the 'dark-mode' class on the body
+            bodyElement.classList.toggle('dark-mode');
+            gameCards.forEach(card => card.classList.toggle('dark-mode'));
+
+            // Change the icon and text based on mode
+            if (bodyElement.classList.contains('dark-mode')) {
+                iconElement.textContent = '🌜'; // Moon icon for dark mode
+                textElement.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                iconElement.textContent = '🌞'; // Sun icon for light mode
+                textElement.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // JavaScript for Game Popup
+        function showGamePopup(game) {
+            const popup = document.getElementById('game-popup');
+            const iframe = document.getElementById('game-iframe');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+            if (game === 'game1') {
+                iframe.src = 'https://supermario64.glitch.me';
+                fullscreenBtn.style.display = 'block';
+            } else {
+                iframe.src = '';
+                fullscreenBtn.style.display = 'none';
+            }
+
+            popup.style.display = 'flex';
+        }
+
+        function closeGamePopup() {
+            document.getElementById('game-popup').style.display = 'none';
+        }
+
+        function showVersionDropdown() {
+            document.getElementById('version-dropdown').style.display = 'block';
+        }
+
+        function closeBlogPopup() {
+            document.getElementById('blog-popup').style.display = 'none';
+        }
+
+        function showBlogPopup() {
+            document.getElementById('blog-popup').style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
