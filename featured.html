@@ -207,7 +207,7 @@
         <h1>Featured Games</h1>
         <nav>
             <ul>
-                <li><a href="home.html">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="featured.html">Featured Games</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
@@ -260,8 +260,9 @@
     <div class="version-dropdown" id="version-dropdown">
         <select onchange="launchVersion(this.value)">
             <option value="">Choose a version</option>
-            <option value="https://example.com/1.8.8">1.8.8</option>
-            <option value="https://example.com/1.5.2">1.5.2</option>
+            <option value="https://pandaprogaming.github.io/Minecraft_1.8.8.html">1.8.8</option>
+            <option value="https://pandaprogaming.github.io/Minecraft_1.5.2.html">1.5.2</option>
+            <option value="https://pandaprogaming.github.io/EaglerCraftZ.html">1.12.2</option> <!-- Added Minecraft 1.12.2 -->
         </select>
     </div>
 
@@ -294,7 +295,7 @@
             // Toggle the 'dark-mode' class on the body
             bodyElement.classList.toggle('dark-mode');
 
-            // Change the icon and text based on mode
+            // Change the icon and text based on the current theme
             if (bodyElement.classList.contains('dark-mode')) {
                 iconElement.textContent = '🌜'; // Moon icon for dark mode
                 textElement.textContent = 'Dark Mode';
@@ -308,38 +309,40 @@
             }
         });
 
+        // Show the Game Popup
         function showGamePopup(game) {
             const gamePopup = document.getElementById('game-popup');
             const gameIframe = document.getElementById('game-iframe');
-            const fullscreenBtn = document.getElementById('fullscreen-btn');
 
             if (game === 'minecraft') {
                 gameIframe.src = ''; // Ensure no previous source
                 document.getElementById('version-dropdown').style.display = 'block';
-                fullscreenBtn.style.display = 'none'; // Remove fullscreen button
             } else {
                 gameIframe.src = `https://supermario64.glitch.me`; // Example for other games
-                fullscreenBtn.style.display = 'block';
                 document.getElementById('version-dropdown').style.display = 'none';
             }
 
             gamePopup.style.display = 'flex';
         }
 
+        // Close the Game Popup
         function closeGamePopup() {
             document.getElementById('game-popup').style.display = 'none';
         }
 
+        // Launch the selected Minecraft version
         function launchVersion(url) {
             if (url) {
                 window.open(url, '_blank');
             }
         }
 
+        // Close the Blog Popup
         function closeBlogPopup() {
             document.getElementById('blog-popup').style.display = 'none';
         }
 
+        // Event listener for Minecraft Play button
         document.querySelectorAll('.game-card button').forEach(button => {
             button.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -351,6 +354,7 @@
             });
         });
 
+        // Event listener for Blog button
         document.querySelector('a[href="blog.html"]').addEventListener('click', (event) => {
             event.preventDefault();
             document.getElementById('blog-popup').style.display = 'flex';
